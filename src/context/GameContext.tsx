@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
 
-type Badge = 'naga' | 'wat' | 'phataksuea' | 'guardian';
+type Badge = 'naga_gem' | 'wat_gem' | 'phataksuea_gem' | 'guardian';
 
 interface GameState {
   score: number;

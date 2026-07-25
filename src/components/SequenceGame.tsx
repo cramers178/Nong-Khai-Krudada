@@ -1,60 +1,46 @@
 import { useState } from 'react';
 import { useGame } from '../context/GameContext';
 
-type Command = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | 'LOOP';
+type Command = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 
-interface CodingGridProps {
+interface SequenceGameProps {
   onComplete: () => void;
 }
 
-export default function CodingGrid({ onComplete }: CodingGridProps) {
+export default function SequenceGame({ onComplete }: SequenceGameProps) {
   const { addScore } = useGame();
   const [commands, setCommands] = useState<Command[]>([]);
   const [playerPos, setPlayerPos] = useState({ r: 4, c: 0 });
   const [isRunning, setIsRunning] = useState(false);
   const [isWon, setIsWon] = useState(false);
-  const [keysCollected, setKeysCollected] = useState(0);
-  const [collectedPos, setCollectedPos] = useState<Set<string>>(new Set());
 
-  // Fixed positions
-  const keyPositions = [{ r: 4, c: 2 }, { r: 1, c: 2 }, { r: 1, c: 4 }];
-  const walls = [{ r: 3, c: 0 }, { r: 3, c: 1 }, { r: 2, c: 2 }, { r: 2, c: 3 }];
+  // Target is Wat Kaeo Ku at top right
+  const targetPos = { r: 0, c: 4 };
+  const walls = [{ r: 1, c: 1 }, { r: 1, c: 2 }, { r: 2, c: 2 }, { r: 3, c: 4 }];
 
   const handleRun = () => {
     if (commands.length === 0 || isRunning) return;
     setIsRunning(true);
     setPlayerPos({ r: 4, c: 0 }); // Reset start
-    setKeysCollected(0);
-    setCollectedPos(new Set());
 
     let currentPos = { r: 4, c: 0 };
-    let currentKeys = 0;
-    let currentCollected = new Set<string>();
     let i = 0;
-    
-    // Process loop command simply by duplicating commands if LOOP is at the end
-    let execCommands = [...commands];
-    if (execCommands.includes('LOOP')) {
-      const loopIndex = execCommands.indexOf('LOOP');
-      const toRepeat = execCommands.slice(0, loopIndex);
-      execCommands = [...toRepeat, ...toRepeat, ...toRepeat]; // repeat 3 times for simplicity
-    }
 
     const interval = setInterval(() => {
-      if (i >= execCommands.length) {
+      if (i >= commands.length) {
         clearInterval(interval);
         setIsRunning(false);
-        if (currentKeys >= 3) {
+        if (currentPos.r === targetPos.r && currentPos.c === targetPos.c) {
           setIsWon(true);
           addScore(20);
           setTimeout(onComplete, 1500);
         } else {
-          alert('ยังเก็บกุญแจไม่ครบ!');
+          alert('ยังไปไม่ถึงวัดแก้วกู่! ลองวางแผนใหม่นะ');
         }
         return;
       }
 
-      const cmd = execCommands[i];
+      const cmd = commands[i];
       const nextPos = { ...currentPos };
 
       if (cmd === 'UP') nextPos.r -= 1;
@@ -80,20 +66,6 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
 
       currentPos = nextPos;
       setPlayerPos({ ...currentPos });
-
-      // Check keys
-      const keyIndex = keyPositions.findIndex(k => k.r === currentPos.r && k.c === currentPos.c);
-      if (keyIndex !== -1) {
-        const posKey = `${currentPos.r}-${currentPos.c}`;
-        if (!currentCollected.has(posKey)) {
-          currentCollected.add(posKey);
-          currentKeys += 1;
-          setKeysCollected(currentKeys);
-          setCollectedPos(new Set(currentCollected));
-          addScore(5); // +5 per key
-        }
-      }
-
       i++;
     }, 400);
   };
@@ -106,8 +78,6 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
     if (!isRunning && !isWon) {
       setCommands([]);
       setPlayerPos({ r: 4, c: 0 });
-      setKeysCollected(0);
-      setCollectedPos(new Set());
     }
   };
 
@@ -126,12 +96,12 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
           {Array.from({ length: 5 }).map((_, r) => 
             Array.from({ length: 5 }).map((_, c) => {
               const isPlayer = playerPos.r === r && playerPos.c === c;
+              const isTarget = targetPos.r === r && targetPos.c === c;
               const isWall = walls.some(w => w.r === r && w.c === c);
-              const isKey = keyPositions.some(k => k.r === r && k.c === c);
-              const isCollected = collectedPos.has(`${r}-${c}`);
               
               let bg = '#1a1c29';
               if (isWall) bg = '#333';
+              if (isTarget) bg = 'rgba(255, 215, 0, 0.1)';
               
               return (
                 <div 
@@ -146,28 +116,24 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
                     fontSize: '1.5rem',
                   }}
                 >
-                  {isPlayer ? '🧑‍🚀' : (isWall ? '🧱' : (isKey && !isCollected ? '🔑' : ''))}
+                  {isPlayer ? '🧑‍🚀' : (isTarget ? '🛕' : (isWall ? '🌲' : ''))}
                 </div>
               );
             })
           )}
         </div>
-        <p style={{ textAlign: 'center', marginTop: '1rem', color: 'var(--accent-color)' }}>
-          กุญแจ: {keysCollected} / 3
-        </p>
-        {isWon && <div style={{ color: '#2ecc71', fontWeight: 'bold', marginTop: '1rem', textAlign: 'center' }}>🎉 ผ่านภารกิจ!</div>}
+        {isWon && <div style={{ color: '#2ecc71', fontWeight: 'bold', marginTop: '1rem', textAlign: 'center' }}>🎉 เดินทางถึงวัดแก้วกู่สำเร็จ!</div>}
       </div>
 
       {/* Controls */}
       <div style={{ minWidth: '200px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <p style={{ color: 'var(--text-muted)' }}>เพิ่มคำสั่งเพื่อเดินไปเก็บกุญแจ 3 ดอก</p>
+        <p style={{ color: 'var(--text-muted)' }}>เรียงลำดับคำสั่งเพื่อเดินทางไปวัดแก้วกู่</p>
         
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
           <button className="btn-secondary" onClick={() => addCommand('UP')} disabled={isRunning}>⬆️ เดินขึ้น</button>
           <button className="btn-secondary" onClick={() => addCommand('DOWN')} disabled={isRunning}>⬇️ เดินลง</button>
           <button className="btn-secondary" onClick={() => addCommand('LEFT')} disabled={isRunning}>⬅️ ไปซ้าย</button>
           <button className="btn-secondary" onClick={() => addCommand('RIGHT')} disabled={isRunning}>➡️ ไปขวา</button>
-          <button className="btn-secondary" onClick={() => addCommand('LOOP')} style={{ gridColumn: 'span 2' }} disabled={isRunning}>🔄 ทำซ้ำ</button>
         </div>
 
         <div style={{ 
