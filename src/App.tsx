@@ -5,7 +5,7 @@ import Intro from './pages/Intro';
 import SoftPower from './pages/SoftPower';
 import CSLessons from './pages/CSLessons';
 import AdventureMap from './pages/AdventureMap';
-import { Shield, Medal } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 function Navbar() {
   const { score, badges } = useGame();
