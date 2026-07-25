@@ -4,7 +4,7 @@ import { MapPin, Info, Star, Target, Gamepad2, ExternalLink } from 'lucide-react
 const softPowerData = [
   {
     id: 'naga',
-    icon: '🐉',
+    icon: '/ตำนานพญานาค.gif',
     title: 'ตำนานพญานาค จังหวัดหนองคาย',
     short: 'ความเชื่อที่อยู่คู่กับวิถีชีวิตริมฝั่งแม่น้ำโขง และปรากฏการณ์บั้งไฟพญานาค',
     content: (
@@ -77,7 +77,7 @@ const softPowerData = [
   },
   {
     id: 'wat',
-    icon: '🛕',
+    icon: '/ศาลาแก้วกู่.gif',
     title: 'ศาลาแก้วกู่ จังหวัดหนองคาย',
     short: 'อุทยานประติมากรรมคอนกรีตเสริมเหล็กที่สะท้อนแนวคิดทางศาสนา',
     content: (
@@ -147,7 +147,7 @@ const softPowerData = [
   },
   {
     id: 'phataksuea',
-    icon: '🌄',
+    icon: '/ผาตากเสื้อ.gif',
     title: 'ผาตากเสื้อ จังหวัดหนองคาย',
     short: 'แหล่งท่องเที่ยวทางธรรมชาติที่มีสะพานกระจก Skywalk ยื่นออกไปจากหน้าผา',
     content: (
@@ -227,7 +227,13 @@ export default function SoftPower() {
     const data = softPowerData.find(d => d.id === selectedId);
     return (
       <div className="glass-panel animate-fade-in" style={{ padding: '3rem', maxWidth: '900px', margin: '0 auto' }}>
-        <div style={{ fontSize: '4rem', textAlign: 'center', marginBottom: '1rem' }}>{data?.icon}</div>
+        <div style={{ textAlign: 'center', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+          {data?.icon.startsWith('/') ? (
+            <img src={data.icon} alt={data.title} style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '50%', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }} />
+          ) : (
+            <div style={{ fontSize: '4rem' }}>{data?.icon}</div>
+          )}
+        </div>
         <h1 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '2rem' }}>{data?.title}</h1>
         
         <div style={{ background: 'rgba(255,255,255,0.05)', padding: '2.5rem', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)' }}>
@@ -273,9 +279,14 @@ export default function SoftPower() {
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: '50%',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+              boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+              overflow: 'hidden'
             }}>
-              {item.icon}
+              {item.icon.startsWith('/') ? (
+                 <img src={item.icon} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                 item.icon
+              )}
             </div>
             <h2 style={{ color: 'var(--primary-color)', marginBottom: '1rem', fontSize: '1.8rem' }}>{item.title}</h2>
             <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', textAlign: 'center', lineHeight: '1.6' }}>
