@@ -202,3 +202,17 @@ body {
   border-color: #ffd700;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
+
+/* Image Map Hover Zones */
+.hover-zone {
+  display: block;
+  border-radius: 50px;
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-zone:hover {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+  cursor: pointer;
+}

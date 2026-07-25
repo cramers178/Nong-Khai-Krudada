@@ -1,38 +1,87 @@
 import { Link } from 'react-router-dom';
-import { Play, BookOpen, Map, Monitor } from 'lucide-react';
 
 export default function Home() {
   return (
-    <div className="home-container animate-fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '80vh', textAlign: 'center' }}>
-      <div className="glass-panel" style={{ padding: '4rem', maxWidth: '800px', width: '100%' }}>
-        <h1 className="title text-gradient" style={{ fontSize: '4rem', marginBottom: '1rem' }}>
-          Nong Khai Adventure
-        </h1>
-        <h2 className="subtitle" style={{ fontSize: '1.5rem', marginBottom: '3rem', color: 'var(--text-muted)' }}>
-          ผจญภัยตามรอย Soft Power จังหวัดหนองคาย
-        </h2>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%',
+      height: 'calc(100vh - 80px)', // adjust for padding if any
+      padding: '0'
+    }}>
+      <div 
+        className="animate-fade-in"
+        style={{
+          position: 'relative',
+          width: '100%',
+          maxWidth: '1200px', // Restrict max width so it doesn't get too large
+          aspectRatio: '16/10', // Adjust if the real image aspect ratio is different (e.g. 3/2 or 16/9)
+          backgroundImage: 'url(/cover.jpg)', // The user must save their image as public/cover.jpg
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+          borderRadius: '16px',
+          boxShadow: '0 10px 40px rgba(0,0,0,0.8)'
+        }}
+      >
+        {/* Invisible clickable areas over the drawn buttons in the image */}
         
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem', marginTop: '2rem' }}>
-          <Link to="/adventure" className="btn-primary" style={{ gridColumn: 'span 2', padding: '1.5rem', fontSize: '1.5rem' }}>
-            <Play size={32} /> เริ่มเกม
-          </Link>
-          
-          <Link to="/intro" className="btn-secondary">
-            <BookOpen size={24} /> บทนำ
-          </Link>
-          
-          <Link to="/softpower" className="btn-secondary">
-            <Map size={24} /> เรียนรู้ Soft Power
-          </Link>
-          
-          <Link to="/cslessons" className="btn-secondary" style={{ gridColumn: 'span 2' }}>
-            <Monitor size={24} /> วิทยาการคำนวณ ม.3
-          </Link>
-        </div>
-      </div>
-      
-      <div style={{ marginTop: '3rem', color: 'var(--text-muted)' }}>
-        <p>โครงงานบูรณาการ Soft Power และวิทยาการคำนวณ</p>
+        {/* 1. เริ่มเกม */}
+        <Link 
+          to="/adventure" 
+          className="hover-zone" 
+          title="เริ่มเกม"
+          style={{
+            position: 'absolute',
+            top: '47%', left: '35%', width: '19.5%', height: '8%'
+          }} 
+        />
+
+        {/* 2. เรียนรู้ Soft Power */}
+        <Link 
+          to="/softpower" 
+          className="hover-zone" 
+          title="เรียนรู้ Soft Power"
+          style={{
+            position: 'absolute',
+            top: '57%', left: '35%', width: '19.5%', height: '8%'
+          }} 
+        />
+
+        {/* 3. วิทยาการคำนวณ ม.3 */}
+        <Link 
+          to="/cslessons" 
+          className="hover-zone" 
+          title="วิทยาการคำนวณ ม.3"
+          style={{
+            position: 'absolute',
+            top: '67%', left: '35%', width: '19.5%', height: '8%'
+          }} 
+        />
+
+        {/* 4. เล่นเกมผจญภัย */}
+        <Link 
+          to="/adventure" 
+          className="hover-zone" 
+          title="เล่นเกมผจญภัย"
+          style={{
+            position: 'absolute',
+            top: '77%', left: '35%', width: '19.5%', height: '8%'
+          }} 
+        />
+
+        {/* 5. ผู้จัดทำ */}
+        <Link 
+          to="/intro" 
+          className="hover-zone" 
+          title="ผู้จัดทำ"
+          style={{
+            position: 'absolute',
+            top: '86.5%', left: '35%', width: '19.5%', height: '8%'
+          }} 
+        />
+
       </div>
     </div>
   );
