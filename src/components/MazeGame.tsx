@@ -16,7 +16,7 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
   const [isLost, setIsLost] = useState(false);
   const [pearlsCollected, setPearlsCollected] = useState(0);
   const [collectedPositions, setCollectedPositions] = useState<Set<string>>(new Set());
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [timeLeft, setTimeLeft] = useState(45);
 
   // Count total pearls in grid
   const totalPearls = grid.flat().filter(c => c === 4).length;
@@ -107,7 +107,7 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
 
   const handleRetry = () => {
     setIsLost(false);
-    setTimeLeft(60);
+    setTimeLeft(45);
     setPearlsCollected(0);
     setCollectedPositions(new Set());
     // Reset position
@@ -148,9 +148,9 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
             const posKey = `${r}-${c}`;
             const isCollected = collectedPositions.has(posKey);
             
-            // Fog of war logic (visibility radius = 2)
+            // Fog of war logic (visibility radius = 1)
             const distance = Math.abs(playerPos.r - r) + Math.abs(playerPos.c - c);
-            const isVisible = distance <= 2;
+            const isVisible = distance <= 1;
             
             let bg = '#2a2d3e';
             if (cell === 1) bg = '#1a1c29';

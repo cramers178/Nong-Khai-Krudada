@@ -6,8 +6,8 @@ interface CyberDetectiveProps {
   onComplete: () => void;
 }
 
-const GAME_TIME = 8; // seconds per item
-const PASSING_SCORE = 8; // out of 10
+const GAME_TIME = 5; // seconds per item
+const PASSING_SCORE = 9; // out of 10
 
 export default function CyberDetective({ onComplete }: CyberDetectiveProps) {
   const { addScore } = useGame();
@@ -81,11 +81,13 @@ export default function CyberDetective({ onComplete }: CyberDetectiveProps) {
     } else {
       // End game
       setIsGameOver(true);
-      const finalScore = score + (wasCorrect ? 1 : 0);
-      if (finalScore >= PASSING_SCORE) {
+      const newScore = score + (wasCorrect ? 1 : 0);
+      if (newScore >= 9) {
         setIsWon(true);
-        addScore(40);
-        setTimeout(onComplete, 2000);
+        addScore(30);
+        setTimeout(onComplete, 1500);
+      } else {
+        alert('เกมจบแล้ว! คุณได้ ' + newScore + ' คะแนน (ต้องได้ 9 ขึ้นไปถึงจะผ่าน)');
       }
     }
   };

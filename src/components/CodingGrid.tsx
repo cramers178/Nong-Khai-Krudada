@@ -22,9 +22,9 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
   const [collectedPos, setCollectedPos] = useState<Set<string>>(new Set());
 
   // Fixed positions
-  const keyPositions = [{ r: 3, c: 2 }, { r: 1, c: 2 }, { r: 1, c: 4 }];
-  const bombs = [{ r: 4, c: 0 }, { r: 2, c: 2 }];
-  const walls = [{ r: 3, c: 0 }, { r: 3, c: 1 }, { r: 2, c: 3 }, { r: 0, c: 2 }];
+  const keyPositions = [{ r: 3, c: 2 }, { r: 1, c: 2 }, { r: 1, c: 4 }, { r: 5, c: 5 }];
+  const bombs = [{ r: 4, c: 0 }, { r: 2, c: 2 }, { r: 4, c: 5 }, { r: 1, c: 3 }];
+  const walls = [{ r: 3, c: 0 }, { r: 3, c: 1 }, { r: 2, c: 3 }, { r: 0, c: 2 }, { r: 5, c: 4 }];
 
   const getDirIcon = (dir: Direction) => {
     switch(dir) {
@@ -62,12 +62,12 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
       if (i >= execCommands.length) {
         clearInterval(interval);
         setIsRunning(false);
-        if (currentKeys >= 3) {
+        if (currentKeys >= 4) {
           setIsWon(true);
           addScore(30);
           setTimeout(onComplete, 1500);
         } else {
-          alert('ยังเก็บกุญแจไม่ครบ! (ได้ ' + currentKeys + '/3)');
+          alert('ยังเก็บกุญแจไม่ครบ! (ได้ ' + currentKeys + '/4)');
         }
         return;
       }
@@ -226,14 +226,14 @@ export default function CodingGrid({ onComplete }: CodingGridProps) {
           )}
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem' }}>
-           <p style={{ color: 'var(--accent-color)', fontWeight: 'bold' }}>🔑 กุญแจ: {keysCollected} / 3</p>
+           <p style={{ color: 'var(--accent-color)', fontWeight: 'bold' }}>🔑 กุญแจ: {keysCollected} / 4</p>
            {isWon && <div style={{ color: '#2ecc71', fontWeight: 'bold' }}>🎉 ผ่านภารกิจ!</div>}
         </div>
       </div>
 
       {/* Controls */}
       <div style={{ minWidth: '250px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <p style={{ color: 'var(--text-muted)' }}>การเขียนโปรแกรมเชิงวัตถุ (หันหน้าทิศทาง)<br/>หลบระเบิดและเก็บกุญแจ 3 ดอก</p>
+        <p style={{ color: 'var(--text-muted)' }}>การเขียนโปรแกรมเชิงวัตถุ (หันหน้าทิศทาง)<br/>หลบระเบิดและเก็บกุญแจ 4 ดอก</p>
         
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
           <button className="btn-secondary" onClick={() => addCommand('FORWARD')} disabled={isRunning} style={{ gridColumn: 'span 2' }}>🚶 เดินหน้า (Forward)</button>

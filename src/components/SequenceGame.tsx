@@ -7,7 +7,7 @@ interface SequenceGameProps {
   onComplete: () => void;
 }
 
-const MAX_COMMANDS = 12;
+const MAX_COMMANDS = 10;
 
 export default function SequenceGame({ onComplete }: SequenceGameProps) {
   const { addScore } = useGame();
@@ -17,7 +17,8 @@ export default function SequenceGame({ onComplete }: SequenceGameProps) {
   // Guard initial state
   const initialGuards = [
     { id: 1, r: 4, c: 3, dir: -1, minR: 1, maxR: 4 }, // patrols vertically
-    { id: 2, r: 1, c: 1, dir: 1, minC: 1, maxC: 4, isHorizontal: true } // patrols horizontally
+    { id: 2, r: 1, c: 1, dir: 1, minC: 1, maxC: 4, isHorizontal: true }, // patrols horizontally
+    { id: 3, r: 2, c: 4, dir: -1, minR: 0, maxR: 4 } // 3rd guard
   ];
   const [guards, setGuards] = useState(initialGuards);
   
@@ -118,7 +119,7 @@ export default function SequenceGame({ onComplete }: SequenceGameProps) {
       setPlayerPos({ ...currentPos });
       setGuards(currentGuards);
       i++;
-    }, 500);
+    }, 300);
   };
 
   const addCommand = (cmd: Command) => {

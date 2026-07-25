@@ -12,7 +12,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
   const [answers, setAnswers] = useState({ q1: '', q2: '', q3: '' });
   const [isWon, setIsWon] = useState(false);
   const [isLost, setIsLost] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(45);
+  const [timeLeft, setTimeLeft] = useState(25);
 
   useEffect(() => {
     generateRandomData();
@@ -45,7 +45,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
 
     setData({ naga: n, wat: w, pha: p });
     setAnswers({ q1: '', q2: '', q3: '' });
-    setTimeLeft(45);
+    setTimeLeft(25);
     setIsLost(false);
   };
 

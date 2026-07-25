@@ -31,7 +31,7 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
   const [sequence, setSequence] = useState<(string | null)[]>([null, null, null, null, null]);
   const [isWon, setIsWon] = useState(false);
   const [selectedAvailable, setSelectedAvailable] = useState<number | null>(null);
-  const [hp, setHp] = useState(3);
+  const [hp, setHp] = useState(1);
   const [isLost, setIsLost] = useState(false);
   
   const handleSlotClick = (index: number) => {
@@ -81,7 +81,7 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
   const resetGame = () => {
     setSequence([null, null, null, null, null]);
     setSelectedAvailable(null);
-    setHp(3);
+    setHp(1);
     setIsLost(false);
   };
 
