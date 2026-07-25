@@ -16,7 +16,7 @@ interface MemoryGameProps {
 export default function MemoryGame({ onComplete }: MemoryGameProps) {
   const [cards, setCards] = useState<Card[]>([]);
   const [flippedIndices, setFlippedIndices] = useState<number[]>([]);
-  const [matches, setMatches] = useState(0);
+  const [, setMatches] = useState(0);
   const [moves, setMoves] = useState(0);
 
   useEffect(() => {

@@ -52,7 +52,7 @@ export default function CSLessons() {
                 { id: 1, question: 'สัญลักษณ์รูปสี่เหลี่ยมผืนผ้าในผังงาน หมายถึงอะไร?', options: ['เริ่มต้น/สิ้นสุด', 'การปฏิบัติงาน/ประมวลผล', 'การตัดสินใจ', 'ทิศทาง'], correctIndex: 1 },
                 { id: 2, question: 'สัญลักษณ์รูปสี่เหลี่ยมขนมเปียกปูน (ข้าวหลามตัด) หมายถึงอะไร?', options: ['การปฏิบัติงาน', 'รับข้อมูล/แสดงผลข้อมูล', 'การตัดสินใจ', 'จุดเชื่อมต่อ'], correctIndex: 2 }
               ]}
-              onComplete={(score) => handleComplete(2)}
+              onComplete={() => handleComplete(2)}
             />
           </div>
         );
@@ -72,7 +72,7 @@ export default function CSLessons() {
                 { id: 1, question: 'ข้อใดคือข้อมูล (Data)?', options: ['รายงานสรุปยอดขาย', 'เกรดเฉลี่ยของนักเรียน', 'คะแนนสอบของนักเรียนแต่ละคน', 'พยากรณ์อากาศพรุ่งนี้'], correctIndex: 2 },
                 { id: 2, question: 'สารสนเทศ (Information) เกิดจากอะไร?', options: ['ข้อมูลที่ผ่านการประมวลผลแล้ว', 'ข้อมูลดิบที่เพิ่งเก็บรวบรวมมา', 'รหัสผ่านเข้าเครื่องคอมพิวเตอร์', 'ตัวเลขเท่านั้น'], correctIndex: 0 }
               ]}
-              onComplete={(score) => handleComplete(4)}
+              onComplete={() => handleComplete(4)}
             />
           </div>
         );
@@ -85,7 +85,7 @@ export default function CSLessons() {
                 { id: 1, question: 'ถ้ามีคนแปลกหน้าทักแชทมาขอรหัสผ่านเกมเพื่อเติมไอเทมให้ฟรี ควรทำอย่างไร?', options: ['ให้ไปเลย เพราะอยากได้ไอเทมฟรี', 'ถามชื่อจริงก่อนแล้วค่อยให้', 'ปฏิเสธและบล็อกทันที', 'ให้รหัสผ่านแต่เปลี่ยนรหัสผ่านทีหลัง'], correctIndex: 2 },
                 { id: 2, question: 'ข้อใดเป็นการตั้งรหัสผ่านที่ดี?', options: ['12345678', 'วันเดือนปีเกิดตัวเอง', 'ชื่อเล่นตัวเอง', 'ประกอบด้วยตัวอักษรพิมพ์ใหญ่ พิมพ์เล็ก และตัวเลข'], correctIndex: 3 }
               ]}
-              onComplete={(score) => handleComplete(5)}
+              onComplete={() => handleComplete(5)}
             />
           </div>
         );

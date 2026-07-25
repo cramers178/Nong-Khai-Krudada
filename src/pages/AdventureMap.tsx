@@ -259,7 +259,7 @@ function FinalStage() {
     { id: 5, question: 'ข้อใดคือพฤติกรรมการใช้อินเทอร์เน็ตที่ปลอดภัย?', options: ['บอกรหัสผ่านให้เพื่อนสนิท', 'ตั้งรหัสผ่านที่เดาง่ายๆ เช่น 1234', 'ออกจากระบบทุกครั้งหลังใช้งานเสร็จ', 'คลิกลิงก์แปลกๆ ที่ส่งมาในแชท'], correctIndex: 2 }
   ];
 
-  const handleComplete = (score: number, total: number) => {
+  const handleComplete = (score: number) => {
     if (score >= 4 && !badges.includes('guardian')) { // 80% passing grade
       addScore(50);
       unlockBadge('guardian');

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 type Command = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 
