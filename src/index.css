@@ -22,7 +22,9 @@
 
 body {
   font-family: 'Prompt', sans-serif;
-  background: var(--bg-gradient);
+  background: linear-gradient(rgba(15, 17, 26, 0.7), rgba(26, 16, 37, 0.8)), url('/map.png');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
   color: var(--text-color);
   min-height: 100vh;
