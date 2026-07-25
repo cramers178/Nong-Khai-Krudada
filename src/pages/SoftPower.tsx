@@ -1,95 +1,220 @@
 import { useState } from 'react';
-import { MapPin, Info, Star } from 'lucide-react';
+import { MapPin, Info, Star, Target, Gamepad2, ExternalLink } from 'lucide-react';
 
 const softPowerData = [
   {
     id: 'naga',
     icon: '🐉',
-    title: 'ตำนานพญานาค',
-    short: 'ศึกษาความเชื่อเกี่ยวกับพญานาค ตำนานบั้งไฟพญานาค และความสำคัญที่มีต่อวิถีชีวิตชาวหนองคาย',
+    title: 'ตำนานพญานาค จังหวัดหนองคาย',
+    short: 'ความเชื่อที่อยู่คู่กับวิถีชีวิตริมฝั่งแม่น้ำโขง และปรากฏการณ์บั้งไฟพญานาค',
     content: (
       <>
+        <h3 style={{ color: '#ffc107', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Info size={20} /> ความเป็นมา
+        </h3>
         <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
-          ความเชื่อเรื่อง <strong>"พญานาค"</strong> ถือเป็นรากฐานทางวัฒนธรรมที่ผูกพันกับชาวหนองคายและผู้คนในลุ่มแม่น้ำโขงมาอย่างยาวนาน ชาวบ้านมีความเชื่ออย่างแรงกล้าว่าพญานาคคือผู้ปกปักรักษาแม่น้ำโขง และเป็นผู้บันดาลความอุดมสมบูรณ์ให้แก่แผ่นดิน
+          พญานาคเป็นสัญลักษณ์ที่สำคัญของจังหวัดหนองคาย และเป็นความเชื่อที่อยู่คู่กับวิถีชีวิตของประชาชนริมฝั่งแม่น้ำโขงมาเป็นเวลาหลายร้อยปี ตามความเชื่อของชาวลุ่มแม่น้ำโขง พญานาคเป็นสัตว์ในตำนานที่มีลักษณะคล้ายงูใหญ่ มีฤทธิ์อำนาจและอาศัยอยู่ใต้ลำน้ำโขง ทำหน้าที่ปกปักรักษาแม่น้ำ พระพุทธศาสนา และผู้คนที่อาศัยอยู่บริเวณนี้
         </p>
-        
+        <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+          ความเชื่อเรื่องพญานาคมีความเกี่ยวข้องกับพระพุทธศาสนา โดยเชื่อว่าพญานาคเป็นผู้ศรัทธาในพระพุทธเจ้า และมีเรื่องราวปรากฏอยู่ในพุทธประวัติหลายตอน เช่น เรื่องพญานาคมุจลินท์ที่แผ่พังพานปกป้องพระพุทธเจ้าจากฝนตกหนักหลังตรัสรู้
+        </p>
+
         <div style={{ background: 'rgba(255, 0, 122, 0.1)', borderLeft: '4px solid #ff007a', padding: '1.5rem', borderRadius: '0 12px 12px 0', marginBottom: '1.5rem' }}>
-          <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Star size={20} /> ไฮไลท์สำคัญ: บั้งไฟพญานาค
+          <h3 style={{ color: '#ff007a', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Star size={20} /> ปรากฏการณ์บั้งไฟพญานาค
           </h3>
+          <p style={{ lineHeight: '1.8', marginBottom: '0.5rem' }}>
+            ปรากฏการณ์บั้งไฟพญานาค เป็นปรากฏการณ์ที่เกิดขึ้นในคืนวันออกพรรษา ซึ่งมีลูกไฟสีแดงอมชมพูพุ่งขึ้นจากแม่น้ำโขงโดยไม่มีเสียงและไม่มีควัน ชาวบ้านเชื่อว่าเป็นการถวายพุทธบูชาของพญานาคต่อองค์พระสัมมาสัมพุทธเจ้า
+          </p>
           <p style={{ lineHeight: '1.8' }}>
-            จุดเด่นที่สุดคือปรากฏการณ์ <strong>"บั้งไฟพญานาค"</strong> ที่จะเกิดขึ้นในช่วงวันออกพรรษา (ขึ้น 15 ค่ำ เดือน 11) ของทุกปี โดยจะมีลูกไฟสีชมพูแดงพุ่งขึ้นจากใต้แม่น้ำโขงสู่ท้องฟ้า ซึ่งเป็นปรากฏการณ์ธรรมชาติที่ผสมผสานกับความเชื่อได้อย่างลงตัว
+            ปรากฏการณ์นี้ทำให้จังหวัดหนองคายกลายเป็นแหล่งท่องเที่ยวที่มีชื่อเสียง นักท่องเที่ยวจากทั่วประเทศและต่างประเทศเดินทางมาชมเป็นจำนวนมากในทุกปี ส่งผลดีต่อเศรษฐกิจ การท่องเที่ยว และวัฒนธรรมของจังหวัด
           </p>
         </div>
 
         <h3 style={{ color: '#4cc9f0', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Info size={20} /> พลังแห่ง Soft Power
+          <Star size={20} /> ความสำคัญ
         </h3>
-        <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
-          <li><strong>กระตุ้นเศรษฐกิจ:</strong> ดึงดูดนักท่องเที่ยวหลายแสนคนในช่วงเทศกาลออกพรรษา</li>
-          <li><strong>ศิลปวัฒนธรรม:</strong> เกิดการสร้างสรรค์ลายผ้า ลายเครื่องปั้นดินเผา และการฟ้อนรำที่เกี่ยวกับพญานาค</li>
-          <li><strong>ภาพยนตร์และสื่อ:</strong> เป็นแรงบันดาลใจในการสร้างภาพยนตร์และละครมากมายที่เผยแพร่สู่สายตาชาวโลก</li>
+        <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+          <li>เป็นสัญลักษณ์ประจำจังหวัดหนองคาย</li>
+          <li>สะท้อนความเชื่อและวัฒนธรรมของชาวลุ่มแม่น้ำโขง</li>
+          <li>ส่งเสริมการท่องเที่ยวและเศรษฐกิจของจังหวัด</li>
+          <li>เป็นแรงบันดาลใจในการสร้างงานศิลปกรรมและสถาปัตยกรรมหลายแห่ง</li>
         </ul>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: 'rgba(76, 201, 240, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#4cc9f0', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Target size={20} /> ความรู้ที่ได้รับ
+            </h3>
+            <ul style={{ listStyle: 'none', paddingLeft: '0', lineHeight: '1.8' }}>
+              <li>✓ อธิบายตำนานพญานาคได้</li>
+              <li>✓ อธิบายความสำคัญของบั้งไฟพญานาคได้</li>
+              <li>✓ เห็นคุณค่าของวัฒนธรรมท้องถิ่น</li>
+              <li>✓ เข้าใจความสัมพันธ์ระหว่างความเชื่อ ศาสนา และการท่องเที่ยว</li>
+            </ul>
+          </div>
+          <div style={{ background: 'rgba(255, 193, 7, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Gamepad2 size={20} /> ภารกิจ
+            </h3>
+            <ol style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+              <li>อ่านข้อมูลให้ครบทุกหัวข้อ</li>
+              <li>ค้นหา "ลูกแก้วนาค" จำนวน 3 ลูก</li>
+              <li>พูดคุยกับผู้เฒ่าประจำหมู่บ้าน</li>
+              <li>ตอบคำถามจำนวน 5 ข้อ</li>
+              <li>รับเหรียญ "ผู้พิทักษ์พญานาค"</li>
+            </ol>
+          </div>
+        </div>
+        
+        <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a href="https://www.phonphisai.go.th/index/?page=article3679" target="_blank" rel="noreferrer" style={{ color: '#4cc9f0', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <ExternalLink size={16} /> อ่านเพิ่มเติมคลิกที่นี่
+          </a>
+        </p>
       </>
     )
   },
   {
     id: 'wat',
     icon: '🛕',
-    title: 'ศาลาแก้วกู่',
-    short: 'อุทยานเทวาลัยที่มีประติมากรรมปูนปั้นขนาดใหญ่ ศึกษาประวัติผู้สร้างและความโดดเด่นทางสถาปัตยกรรม',
+    title: 'ศาลาแก้วกู่ จังหวัดหนองคาย',
+    short: 'อุทยานประติมากรรมคอนกรีตเสริมเหล็กที่สะท้อนแนวคิดทางศาสนา',
     content: (
       <>
+        <h3 style={{ color: '#ffc107', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Info size={20} /> ความเป็นมา
+        </h3>
         <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
-          <strong>ศาลาแก้วกู่</strong> หรือ อุทยานเทวาลัย เป็นสถานที่ที่รวบรวมประติมากรรมปูนปั้นขนาดมหึมา สร้างขึ้นโดย <em>"หลวงปู่บุญเหลือ สุรีรัตน์"</em> ภายใต้แนวคิดในการผสมผสานความเชื่อของศาสนาพุทธ พราหมณ์ และฮินดู เข้าไว้ด้วยกันในพื้นที่เดียว
+          ศาลาแก้วกู่ หรือวัดแขก เป็นอุทยานประติมากรรมขนาดใหญ่ที่ตั้งอยู่ในจังหวัดหนองคาย สร้างขึ้นโดยหลวงปู่บุญเหลือ สุรีรัตน์ เมื่อปี พ.ศ. 2521 ภายในพื้นที่มีประติมากรรมคอนกรีตเสริมเหล็กจำนวนมาก ทั้งพระพุทธรูป เทพเจ้าในศาสนาฮินดู และรูปปั้นจากความเชื่อพื้นบ้าน
         </p>
-        
+        <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+          การออกแบบประติมากรรมแต่ละชิ้นสะท้อนแนวคิดเรื่องการทำความดี ความกตัญญู การเวียนว่ายตายเกิด และหลักธรรมทางพระพุทธศาสนา ทำให้ศาลาแก้วกู่เป็นแหล่งเรียนรู้ด้านศิลปะ ศาสนา และวัฒนธรรมที่สำคัญของจังหวัดหนองคาย
+        </p>
+
         <div style={{ background: 'rgba(76, 201, 240, 0.1)', borderLeft: '4px solid #4cc9f0', padding: '1.5rem', borderRadius: '0 12px 12px 0', marginBottom: '1.5rem' }}>
-          <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <MapPin size={20} /> ความโดดเด่นทางสถาปัตยกรรม
+          <h3 style={{ color: '#4cc9f0', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <MapPin size={20} /> จุดเด่นของศาลาแก้วกู่
           </h3>
-          <p style={{ lineHeight: '1.8' }}>
-            ผลงานปูนปั้นแต่ละชิ้นไม่ได้มีเพียงความวิจิตรพิสดารและขนาดที่ใหญ่โตอลังการเท่านั้น แต่ยังแฝงไปด้วย <strong>ปริศนาธรรม ข้อคิด ปรัชญาชีวิต และเรื่องราวของการเวียนว่ายตายเกิด</strong> เอาไว้อย่างแยบยล
-          </p>
+          <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+            <li>มีประติมากรรมขนาดใหญ่กว่า 100 ชิ้น</li>
+            <li>ผสมผสานศิลปะไทย ลาว และฮินดู</li>
+            <li>มีรูปปั้นเทพเจ้า พระพุทธรูป และสัตว์ในตำนาน</li>
+            <li>เป็นแหล่งท่องเที่ยวเชิงวัฒนธรรมที่สำคัญ</li>
+          </ul>
         </div>
 
         <h3 style={{ color: '#ff007a', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Info size={20} /> พลังแห่ง Soft Power
+          <Star size={20} /> ความสำคัญ
         </h3>
-        <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
-          <li><strong>แหล่งท่องเที่ยวเชิงวัฒนธรรม:</strong> กลายเป็น Landmark ที่ชาวไทยและชาวต่างชาติที่มาเยือนหนองคายต้องมาถ่ายรูปและศึกษา</li>
-          <li><strong>แรงบันดาลใจทางศิลปะ:</strong> เป็นแหล่งรวมสุดยอดงานช่างปูนปั้นพื้นบ้านที่ศิลปินรุ่นหลังสามารถมาศึกษาศิลปะการสลักปูนได้</li>
-        </ul>
+        <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+          ศาลาแก้วกู่เป็นแหล่งท่องเที่ยวที่ช่วยเผยแพร่ศิลปวัฒนธรรมและความเชื่อของคนในภูมิภาคลุ่มแม่น้ำโขง อีกทั้งยังเป็นสถานที่ศึกษาประวัติศาสตร์ ศิลปกรรม และหลักธรรมทางศาสนา นักท่องเที่ยวและนักเรียนสามารถเรียนรู้เรื่องราวผ่านประติมากรรมแต่ละชิ้นได้
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: 'rgba(76, 201, 240, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#4cc9f0', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Target size={20} /> ความรู้ที่ได้รับ
+            </h3>
+            <ul style={{ listStyle: 'none', paddingLeft: '0', lineHeight: '1.8' }}>
+              <li>✓ รู้จักประวัติศาลาแก้วกู่</li>
+              <li>✓ เข้าใจแนวคิดของผู้สร้าง</li>
+              <li>✓ เรียนรู้ศิลปกรรมและประติมากรรม</li>
+              <li>✓ เห็นคุณค่าของศิลปวัฒนธรรมไทย</li>
+            </ul>
+          </div>
+          <div style={{ background: 'rgba(255, 193, 7, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Gamepad2 size={20} /> ภารกิจ
+            </h3>
+            <ol style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+              <li>สำรวจประติมากรรม 5 จุด</li>
+              <li>ค้นหารูปปั้นที่กำหนด</li>
+              <li>จับคู่รูปภาพให้ถูกต้อง</li>
+              <li>ตอบคำถามจำนวน 5 ข้อ</li>
+              <li>รับเหรียญ "นักสำรวจศาลาแก้วกู่"</li>
+            </ol>
+          </div>
+        </div>
+
+        <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a href="https://th.wikipedia.org/wiki/%E0%B8%A8%E0%B8%B2%E0%B8%A5%E0%B8%B2%E0%B9%81%E0%B8%81%E0%B9%89%E0%B8%A7%E0%B8%81%E0%B8%B9%E0%B9%88" target="_blank" rel="noreferrer" style={{ color: '#4cc9f0', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <ExternalLink size={16} /> อ่านเพิ่มเติมคลิกที่นี่
+          </a>
+        </p>
       </>
     )
   },
   {
     id: 'phataksuea',
     icon: '🌄',
-    title: 'ผาตากเสื้อ',
-    short: 'จุดชมวิวธรรมชาติที่สวยงาม พร้อมสกายวอล์คพื้นกระจกใส ศึกษาความสำคัญต่อการท่องเที่ยว',
+    title: 'ผาตากเสื้อ จังหวัดหนองคาย',
+    short: 'แหล่งท่องเที่ยวทางธรรมชาติที่มีสะพานกระจก Skywalk ยื่นออกไปจากหน้าผา',
     content: (
       <>
+        <h3 style={{ color: '#ffc107', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Info size={20} /> ความเป็นมา
+        </h3>
         <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
-          <strong>วัดผาตากเสื้อ</strong> ตั้งอยู่บนยอดเขาสูงในอำเภอสังคม จังหวัดหนองคาย ถือเป็นหนึ่งในจุดชมวิวแม่น้ำโขงที่สวยงามที่สุดในประเทศไทย โดยเฉพาะช่วงหน้าหนาวที่สามารถชม <em>ทะเลหมอก</em> ลอยเหนือลำน้ำโขงที่ไหลคดเคี้ยวไปตามพรมแดนไทย-ลาวได้อย่างชัดเจน
+          ผาตากเสื้อ ตั้งอยู่ในอำเภอสังคม จังหวัดหนองคาย เป็นแหล่งท่องเที่ยวทางธรรมชาติที่มีชื่อเสียงและได้รับความนิยมจากนักท่องเที่ยวทั้งชาวไทยและชาวต่างประเทศ จากจุดชมวิวสามารถมองเห็นแม่น้ำโขงและประเทศลาวได้อย่างชัดเจน
         </p>
-        
+        <p style={{ marginBottom: '1.5rem', lineHeight: '1.8' }}>
+          ชื่อ "ผาตากเสื้อ" มาจากเรื่องเล่าของชาวบ้านที่นิยมซักผ้าและนำเสื้อผ้ามาตากบนโขดหินบริเวณหน้าผา ต่อมาพื้นที่แห่งนี้ได้รับการพัฒนาให้เป็นจุดชมวิวและแหล่งท่องเที่ยวสำคัญของจังหวัด
+        </p>
+
         <div style={{ background: 'rgba(255, 193, 7, 0.1)', borderLeft: '4px solid #ffc107', padding: '1.5rem', borderRadius: '0 12px 12px 0', marginBottom: '1.5rem' }}>
-          <h3 style={{ color: '#4cc9f0', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Star size={20} /> ไฮไลท์สำคัญ: สกายวอล์ค (Skywalk)
+          <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <MapPin size={20} /> Skywalk ผาตากเสื้อ
           </h3>
+          <p style={{ lineHeight: '1.8', marginBottom: '0.5rem' }}>
+            จุดเด่นของผาตากเสื้อ คือ สะพานกระจก Skywalk ที่ยื่นออกไปจากหน้าผา นักท่องเที่ยวสามารถเดินชมวิวได้อย่างใกล้ชิด พร้อมชมทัศนียภาพของแม่น้ำโขง ป่าไม้ และภูเขาโดยรอบแบบพาโนรามา
+          </p>
           <p style={{ lineHeight: '1.8' }}>
-            จุดดึงดูดระดับชาติคือ <strong>"สกายวอล์คกระจกใสรูปตัวยู (U-shape)"</strong> ที่ยื่นออกไปที่หน้าผา ซึ่งถือเป็นแห่งแรกของประเทศไทย เปิดให้นักท่องเที่ยวได้สัมผัสความตื่นเต้นท้าทายและชมทัศนียภาพแบบพาโนรามาที่ไม่มีอะไรบดบัง
+            ในช่วงฤดูหนาว บริเวณนี้ยังเป็นจุดชมทะเลหมอกและพระอาทิตย์ขึ้นที่สวยงาม จึงได้รับความนิยมจากนักท่องเที่ยวเป็นจำนวนมาก
           </p>
         </div>
 
         <h3 style={{ color: '#ff007a', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Info size={20} /> พลังแห่ง Soft Power
+          <Star size={20} /> ความสำคัญ
         </h3>
-        <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
-          <li><strong>ยกระดับการท่องเที่ยวทางธรรมชาติ:</strong> เปลี่ยนจากเมืองทางผ่านให้กลายเป็นเมืองหลักแห่งการท่องเที่ยวสัมผัสธรรมชาติ</li>
-          <li><strong>กระจายรายได้สู่ชุมชน:</strong> ทำให้เกิดธุรกิจที่พัก โฮมสเตย์ และร้านอาหารท้องถิ่นในอำเภอสังคมเติบโตอย่างก้าวกระโดด</li>
+        <ul style={{ paddingLeft: '1.5rem', lineHeight: '1.8', marginBottom: '1.5rem' }}>
+          <li>เป็นแหล่งท่องเที่ยวทางธรรมชาติที่สำคัญของจังหวัดหนองคาย</li>
+          <li>ส่งเสริมการท่องเที่ยวเชิงอนุรักษ์</li>
+          <li>สร้างรายได้ให้กับชุมชน</li>
+          <li>เป็นแหล่งเรียนรู้ด้านธรรมชาติและสิ่งแวดล้อม</li>
         </ul>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+          <div style={{ background: 'rgba(76, 201, 240, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#4cc9f0', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Target size={20} /> ความรู้ที่ได้รับ
+            </h3>
+            <ul style={{ listStyle: 'none', paddingLeft: '0', lineHeight: '1.8' }}>
+              <li>✓ รู้จักประวัติผาตากเสื้อ</li>
+              <li>✓ เข้าใจความสำคัญของแหล่งท่องเที่ยวธรรมชาติ</li>
+              <li>✓ ตระหนักถึงการอนุรักษ์สิ่งแวดล้อม</li>
+              <li>✓ ส่งเสริมการท่องเที่ยวอย่างรับผิดชอบ</li>
+            </ul>
+          </div>
+          <div style={{ background: 'rgba(255, 193, 7, 0.1)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h3 style={{ color: '#ffc107', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Gamepad2 size={20} /> ภารกิจ
+            </h3>
+            <ol style={{ paddingLeft: '1.5rem', lineHeight: '1.8' }}>
+              <li>เดินสำรวจเส้นทางธรรมชาติ</li>
+              <li>ถ่ายภาพจุดชมวิว</li>
+              <li>ค้นหาสัญลักษณ์ธรรมชาติ 5 จุด</li>
+              <li>ตอบคำถามจำนวน 5 ข้อ</li>
+              <li>รับเหรียญ "ผู้พิชิตผาตากเสื้อ"</li>
+            </ol>
+          </div>
+        </div>
+
+        <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a href="https://nki.onab.go.th/th/content/category/detail/id/110/iid/25706" target="_blank" rel="noreferrer" style={{ color: '#4cc9f0', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <ExternalLink size={16} /> อ่านเพิ่มเติมคลิกที่นี่
+          </a>
+        </p>
       </>
     )
   }
