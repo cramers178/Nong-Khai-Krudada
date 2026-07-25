@@ -47,7 +47,7 @@ function App() {
             <Route path="/intro" element={<Intro />} />
             <Route path="/softpower" element={<SoftPower />} />
             <Route path="/cslessons" element={<CSLessons />} />
-            <Route path="/adventure" element={<AdventureMap />} />
+            <Route path="/adventure/*" element={<AdventureMap />} />
           </Routes>
         </main>
       </div>
