@@ -1,32 +1,105 @@
-# React + TypeScript + Vite
+# 🎮 คู่มือและรายละเอียดการสร้าง: เกมการศึกษาวิทยาการคำนวณ ม.3 (ธีมหนองคาย Soft Power)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+โปรเจ็กต์นี้ถูกพัฒนาขึ้นเป็น **สื่อการเรียนการสอนแบบโต้ตอบ (Interactive Web Application)** ในรูปแบบเกมผจญภัย (Adventure Game) เพื่อบูรณาการวิชาวิทยาการคำนวณระดับชั้นมัธยมศึกษาปีที่ 3 เข้ากับ **Soft Power ของจังหวัดหนองคาย**
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 💻 1. เทคโนโลยีที่ใช้ในการพัฒนา (Tech Stack)
+- **Frontend Framework:** `React 18` (ใช้งานแบบ Functional Components & Hooks)
+- **Language:** `TypeScript` (ช่วยป้องกันข้อผิดพลาดในการเขียนโค้ดและจัดการ Type)
+- **Build Tool:** `Vite` (ทำให้การรันเซิร์ฟเวอร์และการ Build รวดเร็วมาก)
+- **Styling:** `CSS3 (Vanilla)` + `CSS Variables (Design System)` สำหรับสร้างธีมเกม, Glassmorphism, และแอนิเมชันต่างๆ
+- **Icons:** `lucide-react` (สำหรับไอคอนต่างๆ บน UI)
+- **Deployment:** `Vercel` (เชื่อมต่อกับ Github เพื่ออัปเดตอัตโนมัติเมื่อมีการ push โค้ด)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📁 2. โครงสร้างโฟลเดอร์หลัก (Project Structure)
+โครงสร้างโปรเจ็กต์ถูกจัดระเบียบให้ง่ายต่อการดูแลรักษา (Maintainability) ดังนี้:
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```text
+📦 Nong Khai Krudada
+ ┣ 📂 public                 # เก็บไฟล์รูปภาพพื้นหลัง, .gif พญานาค/ผาตากเสื้อ/ศาลาแก้วกู่
+ ┣ 📂 src
+ ┃ ┣ 📂 components          # โฟลเดอร์เก็บมินิเกมทั้ง 6 ด่าน และชิ้นส่วน UI
+ ┃ ┃ ┣ 📜 MazeGame.tsx       # ด่าน 1: เขาวงกต (มีระบบ Fog of war และจับเวลา)
+ ┃ ┃ ┣ 📜 SequenceGame.tsx   # ด่าน 2: วางบล็อกคำสั่งเดินทาง (มีศัตรูเดินลาดตระเวน)
+ ┃ ┃ ┣ 📜 FlowchartGame.tsx  # ด่าน 3: ต่อผังงานแบบมีเงื่อนไข (Branching)
+ ┃ ┃ ┣ 📜 CodingGrid.tsx     # ด่าน 4: ตรรกะเต่า (Turtle) เดินหน้า/หันซ้าย/หันขวา หลบระเบิด
+ ┃ ┃ ┣ 📜 DataQuiz.tsx       # ด่าน 5: วิเคราะห์ข้อมูลกราฟแท่งแบบสุ่ม (Real-time)
+ ┃ ┃ ┗ 📜 CyberDetective.tsx # ด่าน 6: ตัดสินใจ Swipe เกมหลอกลวง/ปลอดภัย ภายใน 8 วิ
+ ┃ ┃
+ ┃ ┣ 📂 context             # ระบบจัดการข้อมูลกลาง (Global State)
+ ┃ ┃ ┗ 📜 GameContext.tsx    # ควบคุมคะแนน, ด่านที่ปลดล็อก, และสถานะของเกม
+ ┃ ┃
+ ┃ ┣ 📂 pages               # หน้าจอหลักของเว็บไซต์
+ ┃ ┃ ┣ 📜 Home.tsx           # หน้าต้อนรับและปุ่มเริ่มเกม
+ ┃ ┃ ┣ 📜 AdventureMap.tsx   # หน้าแผนที่เลือกด่านต่างๆ (แสดงจุดผ่านด่าน)
+ ┃ ┃ ┣ 📜 SoftPower.tsx      # หน้าอ่านข้อมูลสถานที่สำคัญ (รูป .gif และเนื้อหา)
+ ┃ ┃ ┗ 📜 GameView.tsx       # หน้าคอนเทนเนอร์ที่โหลดมินิเกมแต่ละด่านขึ้นมาแสดง
+ ┃ ┃
+ ┃ ┣ 📜 App.tsx             # จุดเริ่มต้นของแอปพลิเคชัน จัดการ Navigation
+ ┃ ┗ 📜 index.css           # ไฟล์ CSS หลัก (กำหนดสีพื้นฐาน, ฟอนต์ Prompt, แอนิเมชัน)
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+---
+
+## ⚙️ 3. เจาะลึกระบบลอจิกของเกม (Game Logic Details)
+
+### 🧩 3.1 ระบบ State Management (`GameContext.tsx`)
+ใช้ `React Context API` เพื่อแชร์สถานะข้ามหน้าต่างๆ โดยไม่ต้องส่ง props ลงไปลึกๆ
+- `score`: เก็บคะแนนสะสมของผู้เล่น
+- `unlockedChapters`: เก็บอาร์เรย์ของบทที่ปลดล็อกแล้ว หากผู้เล่นชนะด่านที่ 1 ระบบจะทำการเพิ่มด่านที่ 2 เข้าไปในนี้อัตโนมัติ
+
+### 🎮 3.2 ลอจิกของมินิเกมทั้ง 6 ด่าน
+1. **เขาวงกต (MazeGame):** ใช้ตาราง (Grid) 8x8 เก็บพิกัด `(r, c)` ของผู้เล่นและกำแพง ระบบ Fog of War ทำงานโดยคำนวณระยะห่าง (Math.abs) ระหว่างผู้เล่นกับช่องต่างๆ หากระยะห่างเกิน 2 จะทำการแสดงสีทึบ
+2. **เรียงคำสั่ง (SequenceGame):** ใช้ `setInterval` ในการประมวลผลคำสั่งทีละบล็อก มีระบบบอทลาดตระเวน (Guards) ที่จะอัปเดตพิกัดตำแหน่งของตัวเองทุกๆ วินาที และเช็คการชน (Collision Detection) ระหว่างผู้เล่นกับบอท
+3. **ผังงาน (FlowchartGame):** จำลองโครงสร้าง Tree เบื้องต้นผ่าน Array ผู้เล่นต้องนำสัญลักษณ์ไปวางในช่อง `index` ให้ตรงกับเฉลย มีระบบ HP (พลังชีวิต) ถ้าเรียงผิดจะถูกหัก
+4. **เดินตามคำสั่ง (CodingGrid):** ใช้ระบบพิกัดแบบหน้ากระดานสัมพันธ์ (Relative movement) ตัวละครมีสถานะ `ทิศทาง (UP, DOWN, LEFT, RIGHT)`. เมื่อสั่ง `หันซ้าย` ทิศทางจะเปลี่ยน โดยพิกัด (X,Y) ยังคงเดิม ซึ่งเป็นหลักการเขียนโปรแกรมเชิงวัตถุพื้นฐาน
+5. **วิเคราะห์ข้อมูล (DataQuiz):** ใช้ `Math.random()` สุ่มสร้างข้อมูลนักท่องเที่ยวใหม่ทุกครั้งที่โหลดคอมโพเนนต์ ทำให้เฉลยไม่ตายตัว และมีการใช้ `useEffect` ทำ Timer จับเวลาถอยหลัง
+6. **นักสืบไซเบอร์ (CyberDetective):** เป็นเกมแนว Time Attack ผู้เล่นมีเวลา 8 วินาทีต่อ 1 ข้อความ โค้ดจะเช็คเทียบ `boolean` (isPhishing: true/false) มีระบบแอนิเมชันให้ Feedback (ถูก/ผิด) ทันที
+
+---
+
+## 🎨 4. Design System และ UX/UI
+- **สีหลัก (Primary):** `#ffc107` (สีเหลืองทอง เพิ่มความกระตือรือร้น)
+- **สีรอง (Secondary):** `#2f65f6` (สีน้ำเงิน สร้างความน่าเชื่อถือทางเทคโนโลยี)
+- **ความโค้งและเงา (Glassmorphism):** ใช้ `background: rgba(255,255,255,0.05)` และ `backdrop-filter: blur(10px)` ทำให้กล่องข้อความดูโปร่งแสงและทันสมัยเหมือนเกมยุคใหม่
+- **ฟอนต์:** `Prompt` (Google Fonts) ซึ่งอ่านง่ายและเป็นทางการเหมาะสำหรับสื่อการสอน
+
+---
+
+## 🛠️ 5. วิธีการแก้ไขเพิ่มเติม (How to Edit)
+
+### การแก้ไขข้อความ/โจทย์ในเกม
+สามารถเข้าไปแก้ได้ที่โฟลเดอร์ `src/components/` และเปิดไฟล์เกมที่ต้องการ เช่น `CyberDetective.tsx` ค้นหาตัวแปร `allItems` และสามารถแก้ข้อความภาษาไทยในนั้นได้ทันที
+
+### การเปลี่ยนรูปภาพ Soft Power
+- ให้นำรูปไปวางที่โฟลเดอร์ `public/` 
+- เปิดไฟล์ `src/pages/SoftPower.tsx`
+- แก้ไขชื่อไฟล์ที่ตัวแปร `icon: '/ชื่อไฟล์รูปใหม่.gif'` 
+
+---
+
+## 🚀 6. การรันและการอัปเดต (Run & Deploy)
+
+1. **รันทดสอบบนเครื่องส่วนตัว (Local Development)**
+   เปิด Terminal พิมพ์:
+   ```bash
+   npm run dev
+   ```
+   (เข้าดูที่ `http://localhost:5173`)
+
+2. **ทดสอบ Build เพื่อหา Error**
+   ```bash
+   npm run build
+   ```
+   (หากขึ้นว่า `✓ built in ...` แสดงว่าโค้ดไม่มี Error)
+
+3. **อัปเดตขึ้น Vercel (Production)**
+   เพียงแค่ Commit และ Push โค้ดขึ้น Github Vercel จะทำการอัปเดตเว็บให้ใหม่โดยอัตโนมัติ
+   ```bash
+   git add .
+   git commit -m "อัปเดตรายละเอียดเกม"
+   git push
+   ```
