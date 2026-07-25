@@ -27,7 +27,7 @@ function Navbar() {
         <span>คะแนน: {score}</span>
         <div className="badge-container" style={{ marginLeft: '1rem' }}>
           <div className={`badge ${badges.includes('naga_gem') ? 'unlocked' : ''}`} title="อัญมณีพญานาค">🐉</div>
-          <div className={`badge ${badges.includes('wat_gem') ? 'unlocked' : ''}`} title="อัญมณีวัดแก้วกู่">🛕</div>
+          <div className={`badge ${badges.includes('wat_gem') ? 'unlocked' : ''}`} title="อัญมณีศาลาแก้วกู่">🛕</div>
           <div className={`badge ${badges.includes('phataksuea_gem') ? 'unlocked' : ''}`} title="อัญมณีผาตากเสื้อ">🌄</div>
           <div className={`badge ${badges.includes('guardian') ? 'unlocked' : ''}`} title="ผู้พิทักษ์หนองคาย">🏆</div>
         </div>

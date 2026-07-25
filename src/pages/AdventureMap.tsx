@@ -28,7 +28,7 @@ function MapOverview() {
           🐉 อัญมณีพญานาค {hasNaga && '✅'}
         </div>
         <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,0,0,0.5)', borderRadius: '20px', border: hasWat ? '1px solid #ffd700' : '1px solid #555', opacity: hasWat ? 1 : 0.5 }}>
-          🛕 อัญมณีวัดแก้วกู่ {hasWat && '✅'}
+          🛕 อัญมณีศาลาแก้วกู่ {hasWat && '✅'}
         </div>
         <div style={{ padding: '0.5rem 1rem', background: 'rgba(0,0,0,0.5)', borderRadius: '20px', border: hasPha ? '1px solid #ffd700' : '1px solid #555', opacity: hasPha ? 1 : 0.5 }}>
           🌄 อัญมณีผาตากเสื้อ {hasPha && '✅'}
@@ -258,7 +258,7 @@ function FinalStage() {
   const finalQuiz = [
     { id: 1, question: 'พญานาคเกี่ยวข้องกับประเพณีใดในจังหวัดหนองคาย?', options: ['ประเพณีบุญบั้งไฟ', 'ประเพณีลอยกระทง', 'ประเพณีบั้งไฟพญานาค', 'ประเพณีแห่เทียนพรรษา'], correctIndex: 2 },
     { id: 2, question: 'อุทยานเทวาลัยที่มีรูปปั้นขนาดใหญ่เกี่ยวกับศาสนาต่างๆ คือที่ใด?', options: ['ศาลาแก้วกู่', 'วัดโพธิ์ชัย', 'พระธาตุบังพวน', 'วัดผาตากเสื้อ'], correctIndex: 0 },
-    { id: 3, question: 'สถานที่ใดมีสกายวอล์คพื้นกระจกใสรูปเกือกม้า?', options: ['วัดแก้วกู่', 'ผาตากเสื้อ', 'หาดจอมมณี', 'พระธาตุหล้าหนอง'], correctIndex: 1 },
+    { id: 3, question: 'สถานที่ใดมีสกายวอล์คพื้นกระจกใสรูปเกือกม้า?', options: ['ศาลาแก้วกู่', 'ผาตากเสื้อ', 'หาดจอมมณี', 'พระธาตุหล้าหนอง'], correctIndex: 1 },
     { id: 4, question: 'การคิดเชิงคำนวณ (Computational Thinking) มีกี่องค์ประกอบหลัก?', options: ['2 องค์ประกอบ', '3 องค์ประกอบ', '4 องค์ประกอบ', '5 องค์ประกอบ'], correctIndex: 2 },
     { id: 5, question: 'อัลกอริทึม (Algorithm) คืออะไร?', options: ['ภาษาคอมพิวเตอร์', 'ลำดับขั้นตอนในการแก้ปัญหา', 'ชิ้นส่วนของคอมพิวเตอร์', 'โปรแกรมวาดภาพ'], correctIndex: 1 },
     { id: 6, question: 'การเขียนผังงาน (Flowchart) มีประโยชน์อย่างไร?', options: ['ทำให้คอมพิวเตอร์ทำงานเร็วขึ้น', 'ช่วยให้เห็นภาพรวมของลำดับขั้นตอน', 'เป็นวิธีเดียวในการเขียนโปรแกรม', 'ประหยัดไฟ'], correctIndex: 1 },

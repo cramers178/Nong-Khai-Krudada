@@ -48,7 +48,7 @@ export default function SequenceGame({ onComplete }: SequenceGameProps) {
           addScore(20);
           setTimeout(onComplete, 1500);
         } else {
-          alert('ยังไปไม่ถึงวัดแก้วกู่! หรือคำสั่งไม่พอ ลองวางแผนใหม่นะ');
+          alert('ยังไปไม่ถึงศาลาแก้วกู่! หรือคำสั่งไม่พอ ลองวางแผนใหม่นะ');
         }
         return;
       }
@@ -180,13 +180,13 @@ export default function SequenceGame({ onComplete }: SequenceGameProps) {
             })
           )}
         </div>
-        {isWon && <div style={{ color: '#2ecc71', fontWeight: 'bold', marginTop: '1rem', textAlign: 'center' }}>🎉 เดินทางถึงวัดแก้วกู่สำเร็จ!</div>}
+        {isWon && <div style={{ color: '#2ecc71', fontWeight: 'bold', marginTop: '1rem', textAlign: 'center' }}>🎉 เดินทางถึงศาลาแก้วกู่สำเร็จ!</div>}
       </div>
 
       {/* Controls */}
       <div style={{ minWidth: '220px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div>
-          <p style={{ color: 'var(--text-color)', fontWeight: 'bold' }}>ภารกิจ: ไปให้ถึงวัดแก้วกู่</p>
+          <p style={{ color: 'var(--text-color)', fontWeight: 'bold' }}>ภารกิจ: ไปให้ถึงศาลาแก้วกู่</p>
           <p style={{ color: '#ff4757', fontSize: '0.9rem' }}>⚠️ ระวังผู้คุม (👹) ที่เดินลาดตระเวน!</p>
           <p style={{ color: 'var(--accent-color)', fontSize: '0.9rem', marginTop: '0.5rem' }}>บล็อกคำสั่ง: {commands.length} / {MAX_COMMANDS}</p>
         </div>

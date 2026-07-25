@@ -52,7 +52,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
   const getCorrectAnswers = () => {
     const arr = [
       { name: 'พญานาค', val: data.naga },
-      { name: 'วัดแก้วกู่', val: data.wat },
+      { name: 'ศาลาแก้วกู่', val: data.wat },
       { name: 'ผาตากเสื้อ', val: data.pha },
     ];
     
@@ -114,7 +114,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
             transition: 'height 1s ease-in-out'
           }} />
           <div style={{ fontSize: '1.5rem' }}>🛕</div>
-          <div style={{ fontSize: '0.8rem' }}>วัดแก้วกู่</div>
+          <div style={{ fontSize: '0.8rem' }}>ศาลาแก้วกู่</div>
         </div>
 
         {/* Pha Bar */}
@@ -146,7 +146,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
           >
             <option value="">-- เลือกคำตอบ --</option>
             <option value="พญานาค">พญานาค</option>
-            <option value="วัดแก้วกู่">วัดแก้วกู่</option>
+            <option value="ศาลาแก้วกู่">ศาลาแก้วกู่</option>
             <option value="ผาตากเสื้อ">ผาตากเสื้อ</option>
           </select>
         </div>
@@ -162,7 +162,7 @@ export default function DataQuiz({ onComplete }: DataQuizProps) {
           >
             <option value="">-- เลือกคำตอบ --</option>
             <option value="พญานาค">พญานาค</option>
-            <option value="วัดแก้วกู่">วัดแก้วกู่</option>
+            <option value="ศาลาแก้วกู่">ศาลาแก้วกู่</option>
             <option value="ผาตากเสื้อ">ผาตากเสื้อ</option>
           </select>
         </div>
