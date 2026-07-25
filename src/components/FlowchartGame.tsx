@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useGame } from '../context/GameContext';
+import { Heart } from 'lucide-react';
 
 interface FlowchartGameProps {
   onComplete: () => void;
@@ -8,25 +9,33 @@ interface FlowchartGameProps {
 export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
   const { addScore } = useGame();
   
-  // Available blocks to choose from
+  // Available blocks to choose from (with some fakes)
   const availableBlocks = [
-    { id: 'end', text: 'End (จบ)', shape: 'pill' },
-    { id: 'cond', text: 'เจอแผนที่ ?', shape: 'diamond' },
-    { id: 'start', text: 'Start (เริ่ม)', shape: 'pill' },
-    { id: 'yes', text: 'ใช่', shape: 'rect' },
-    { id: 'act2', text: 'ไปด่านต่อไป', shape: 'rect' },
-    { id: 'act1', text: 'เดินหาแผนที่', shape: 'rect' }
+    { id: 'end', text: 'ถึงจุดหมาย (End)', shape: 'pill' },
+    { id: 'fake1', text: 'เดินกลับบ้าน', shape: 'rect' },
+    { id: 'cond', text: 'พลังงานน้อยกว่า 30% ?', shape: 'diamond' },
+    { id: 'start', text: 'เริ่มการเดินทาง (Start)', shape: 'pill' },
+    { id: 'rest', text: 'แวะพักกินข้าว', shape: 'rect' },
+    { id: 'fake2', text: 'เล่นเกมมือถือ', shape: 'rect' },
+    { id: 'walk', text: 'เดินทางต่อ', shape: 'rect' }
   ];
 
   // Correct order
-  const correctOrder = ['start', 'act1', 'cond', 'yes', 'act2', 'end'];
+  // slot 0: start
+  // slot 1: cond
+  // slot 2: yes (rest)
+  // slot 3: no (walk)
+  // slot 4: end
+  const correctOrder = ['start', 'cond', 'rest', 'walk', 'end'];
 
-  const [sequence, setSequence] = useState<(string | null)[]>([null, null, null, null, null, null]);
+  const [sequence, setSequence] = useState<(string | null)[]>([null, null, null, null, null]);
   const [isWon, setIsWon] = useState(false);
   const [selectedAvailable, setSelectedAvailable] = useState<number | null>(null);
+  const [hp, setHp] = useState(3);
+  const [isLost, setIsLost] = useState(false);
   
   const handleSlotClick = (index: number) => {
-    if (isWon) return;
+    if (isWon || isLost) return;
 
     if (selectedAvailable !== null) {
       // Place block in slot
@@ -43,7 +52,7 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
   };
 
   const handleAvailableClick = (index: number) => {
-    if (isWon) return;
+    if (isWon || isLost) return;
     setSelectedAvailable(index === selectedAvailable ? null : index);
   };
 
@@ -56,11 +65,24 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
     const isMatch = sequence.every((id, idx) => id === correctOrder[idx]);
     if (isMatch) {
       setIsWon(true);
-      addScore(20);
+      addScore(30);
       setTimeout(onComplete, 1500);
     } else {
-      alert('ยังมีบางขั้นตอนสลับกันอยู่ ลองจัดเรียงใหม่นะ');
+      const newHp = hp - 1;
+      setHp(newHp);
+      if (newHp <= 0) {
+        setIsLost(true);
+      } else {
+        alert('ผังงานยังไม่ถูกต้อง! ลองพิจารณาเงื่อนไขและการกระทำใหม่นะ');
+      }
     }
+  };
+
+  const resetGame = () => {
+    setSequence([null, null, null, null, null]);
+    setSelectedAvailable(null);
+    setHp(3);
+    setIsLost(false);
   };
 
   const getShapeStyle = (shape: string) => {
@@ -72,50 +94,123 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
     }
   };
 
+  const renderSlot = (idx: number) => {
+    const blockId = sequence[idx];
+    const block = availableBlocks.find(b => b.id === blockId);
+    return (
+      <div 
+        onClick={() => handleSlotClick(idx)}
+        style={{
+          width: '180px',
+          height: '60px',
+          border: block ? 'none' : '2px dashed rgba(255,255,255,0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          backgroundColor: block ? 'transparent' : 'rgba(0,0,0,0.2)',
+          borderRadius: block ? '0' : '8px',
+          ...getShapeStyle(block?.shape || ''),
+          transition: 'all 0.2s',
+          position: 'relative'
+        }}
+      >
+        <span style={{ transform: block?.shape === 'diamond' ? 'skewX(20deg)' : 'none', fontWeight: 'bold' }}>
+          {block ? block.text : `วางบล็อก ${idx+1}`}
+        </span>
+      </div>
+    );
+  };
+
   return (
     <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'center' }}>
       
       {/* Target Flowchart */}
-      <div className="glass-panel" style={{ padding: '2rem', flex: 1, minWidth: '300px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)' }}>ผังงาน (Flowchart)</h3>
+      <div className="glass-panel" style={{ padding: '2rem', flex: 1, minWidth: '450px', display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
         
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-          {sequence.map((blockId, idx) => {
-            const block = availableBlocks.find(b => b.id === blockId);
-            return (
-              <div key={idx} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div 
-                  onClick={() => handleSlotClick(idx)}
-                  style={{
-                    width: '180px',
-                    height: '50px',
-                    border: block ? 'none' : '2px dashed rgba(255,255,255,0.3)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    ...getShapeStyle(block?.shape || ''),
-                    transition: 'all 0.2s'
-                  }}
-                >
-                  <span style={{ transform: block?.shape === 'diamond' ? 'skewX(20deg)' : 'none' }}>
-                    {block ? block.text : 'คลิกเพื่อวาง'}
-                  </span>
-                </div>
-                {idx < sequence.length - 1 && <div style={{ fontSize: '1.5rem', color: 'rgba(255,255,255,0.5)' }}>↓</div>}
+        {/* HP Display */}
+        <div style={{ position: 'absolute', top: '1rem', right: '1rem', display: 'flex', gap: '5px' }}>
+          {Array.from({length: 3}).map((_, i) => (
+            <Heart key={i} fill={i < hp ? '#ff4757' : 'transparent'} color={i < hp ? '#ff4757' : '#555'} size={24} />
+          ))}
+        </div>
+
+        <h3 style={{ marginBottom: '1rem', color: 'var(--primary-color)' }}>สร้างผังงานการเดินทาง</h3>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '2rem', textAlign: 'center' }}>โจทย์: ถ้าพลังงานน้อยกว่า 30% ให้แวะพักกินข้าว ถ้าไม่ใช่นั้นให้เดินทางต่อ</p>
+        
+        {/* Flowchart Layout */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          
+          {/* 1. Start */}
+          {renderSlot(0)}
+          <div style={{ height: '30px', width: '2px', background: 'white', position: 'relative' }}>
+            <div style={{ position: 'absolute', bottom: -5, left: -4, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '8px solid white' }} />
+          </div>
+
+          {/* 2. Condition */}
+          {renderSlot(1)}
+
+          {/* Branching */}
+          <div style={{ display: 'flex', width: '300px', justifyContent: 'space-between', position: 'relative', marginTop: '30px' }}>
+            
+            {/* Horizontal connection line from bottom of cond */}
+            <div style={{ position: 'absolute', top: '-30px', left: '50%', width: '2px', height: '15px', background: 'white' }} />
+            <div style={{ position: 'absolute', top: '-15px', left: '20%', width: '60%', height: '2px', background: 'white' }} />
+            
+            {/* Left Branch (YES) */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '40%' }}>
+              <div style={{ height: '15px', width: '2px', background: 'white', position: 'relative' }}>
+                 <div style={{ position: 'absolute', bottom: -5, left: -4, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '8px solid white' }} />
               </div>
-            );
-          })}
+              <span style={{ color: '#2ecc71', fontWeight: 'bold', marginBottom: '10px' }}>ใช่ (Yes)</span>
+              {renderSlot(2)}
+            </div>
+
+            {/* Right Branch (NO) */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '40%' }}>
+              <div style={{ height: '15px', width: '2px', background: 'white', position: 'relative' }}>
+                 <div style={{ position: 'absolute', bottom: -5, left: -4, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '8px solid white' }} />
+              </div>
+              <span style={{ color: '#e74c3c', fontWeight: 'bold', marginBottom: '10px' }}>ไม่ใช่ (No)</span>
+              {renderSlot(3)}
+            </div>
+          </div>
+
+          {/* Connect branches to end */}
+          <div style={{ display: 'flex', width: '300px', justifyContent: 'space-between', position: 'relative', marginTop: '10px' }}>
+            {/* Left Leg */}
+            <div style={{ width: '40%', height: '30px', borderRight: '2px solid white', borderBottom: '2px solid white' }} />
+            {/* Right Leg */}
+            <div style={{ width: '40%', height: '30px', borderLeft: '2px solid white', borderBottom: '2px solid white' }} />
+            {/* Center Down Arrow */}
+            <div style={{ position: 'absolute', top: '30px', left: '50%', width: '2px', height: '15px', background: 'white' }}>
+               <div style={{ position: 'absolute', bottom: -5, left: -4, borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '8px solid white' }} />
+            </div>
+          </div>
+
+          <div style={{ height: '45px' }} />
+
+          {/* 5. End */}
+          {renderSlot(4)}
         </div>
         
-        {isWon && <div style={{ marginTop: '1rem', color: '#2ecc71', fontWeight: 'bold' }}>🎉 ถูกต้อง!</div>}
-        {!isWon && <button className="btn-primary" style={{ marginTop: '2rem' }} onClick={checkAnswer}>ตรวจสอบผังงาน</button>}
+        {isWon && <div style={{ marginTop: '2rem', color: '#2ecc71', fontWeight: 'bold', fontSize: '1.5rem' }}>🎉 เรียงผังงานถูกต้องสมบูรณ์!</div>}
+        
+        {isLost && (
+          <div style={{ marginTop: '2rem', textAlign: 'center' }}>
+            <div style={{ color: '#ff4757', fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '1rem' }}>💀 พลังชีวิตหมดแล้ว!</div>
+            <button className="btn-primary" onClick={resetGame}>เริ่มพยายามใหม่</button>
+          </div>
+        )}
+
+        {!isWon && !isLost && <button className="btn-primary" style={{ marginTop: '2rem', padding: '10px 30px' }} onClick={checkAnswer}>ตรวจสอบผังงาน</button>}
       </div>
 
       {/* Available Blocks */}
       <div style={{ flex: 1, minWidth: '300px' }}>
         <p style={{ color: 'var(--text-muted)', marginBottom: '1rem' }}>
-          คลิกเลือกสัญลักษณ์ด้านล่าง แล้วคลิกที่ช่องว่างซ้ายมือเพื่อวางสัญลักษณ์
+          👉 1. คลิกเลือกสัญลักษณ์ด้านล่าง<br/>
+          👉 2. คลิกที่ช่องว่างซ้ายมือเพื่อวางสัญลักษณ์
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {availableBlocks.map((block, idx) => {
@@ -133,10 +228,12 @@ export default function FlowchartGame({ onComplete }: FlowchartGameProps) {
                   cursor: isUsed ? 'not-allowed' : 'pointer',
                   opacity: isUsed ? 0.3 : 1,
                   border: selectedAvailable === idx ? '3px solid #fff' : 'none',
-                  ...getShapeStyle(block.shape)
+                  ...getShapeStyle(block.shape),
+                  boxShadow: selectedAvailable === idx ? '0 0 15px rgba(255,255,255,0.5)' : 'none',
+                  transition: 'all 0.2s'
                 }}
               >
-                <span style={{ transform: block.shape === 'diamond' ? 'skewX(20deg)' : 'none' }}>
+                <span style={{ transform: block.shape === 'diamond' ? 'skewX(20deg)' : 'none', fontWeight: 'bold' }}>
                   {block.text}
                 </span>
               </div>
