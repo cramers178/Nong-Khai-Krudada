@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import Intro from './pages/Intro';
 import SoftPower from './pages/SoftPower';
 import AdventureMap from './pages/AdventureMap';
+import Lessons from './pages/Lessons';
 import { Shield } from 'lucide-react';
 
 function Navbar() {
@@ -16,6 +17,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-links">
         <Link to="/" className="nav-link">🏠 หน้าแรก</Link>
+        <Link to="/lessons" className={`nav-link ${location.pathname === '/lessons' ? 'active' : ''}`}>📚 สื่อการสอน</Link>
         <Link to="/intro" className={`nav-link ${location.pathname === '/intro' ? 'active' : ''}`}>📖 บทนำ</Link>
         <Link to="/softpower" className={`nav-link ${location.pathname === '/softpower' ? 'active' : ''}`}>🏞️ Soft Power</Link>
         <Link to="/adventure" className={`nav-link ${location.pathname.startsWith('/adventure') ? 'active' : ''}`}>🎮 แผนที่เกม/บทเรียน</Link>
@@ -42,6 +44,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/lessons" element={<Lessons />} />
             <Route path="/intro" element={<Intro />} />
             <Route path="/softpower" element={<SoftPower />} />
             <Route path="/adventure/*" element={<AdventureMap />} />
