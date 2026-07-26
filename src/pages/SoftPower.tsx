@@ -256,6 +256,12 @@ const softPowerData = [
           <li><b>บุญบั้งไฟ:</b> จัดขบวนแห่เวียนรอบพระอุโบสถเพื่อขอฝนและสืบสานประเพณีอีสานในช่วงเดือนหก</li>
           <li>เป็นโบราณสถานที่ขึ้นทะเบียนโดยกรมศิลปากร และมีสถาปัตยกรรมแบบล้านช้างผสมผสานสมัยรัตนโกสินทร์</li>
         </ul>
+
+        <p style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <a href="https://th.wikipedia.org/wiki/%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B9%82%E0%B8%9E%E0%B8%98%E0%B8%B4%E0%B9%8C%E0%B8%8A%E0%B8%B1%E0%B8%A2_(%E0%B8%88%E0%B8%B1%E0%B8%87%E0%B8%AB%E0%B8%A7%E0%B8%B1%E0%B8%94%E0%B8%AB%E0%B8%99%E0%B8%AD%E0%B8%87%E0%B8%84%E0%B8%B2%E0%B8%A2)" target="_blank" rel="noreferrer" style={{ color: '#4cc9f0', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+            <ExternalLink size={16} /> อ่านเพิ่มเติมคลิกที่นี่
+          </a>
+        </p>
       </>
     )
   }
