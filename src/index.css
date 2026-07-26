@@ -137,11 +137,13 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  gap: 1rem;
 }
 
 .nav-links {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -165,6 +167,31 @@ body {
   border: 1px solid rgba(255, 0, 122, 0.5);
   font-weight: bold;
   color: var(--primary-color);
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: stretch;
+  }
+  
+  .nav-links {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .nav-link {
+    white-space: nowrap;
+  }
+  
+  .score-display {
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
 }
 
 /* Animations */

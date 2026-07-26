@@ -5,6 +5,8 @@ import Intro from './pages/Intro';
 import SoftPower from './pages/SoftPower';
 import AdventureMap from './pages/AdventureMap';
 import Lessons from './pages/Lessons';
+import Dashboard from './pages/Dashboard';
+import { RoleSelectionModal } from './components/RoleSelectionModal';
 import { Shield } from 'lucide-react';
 
 function Navbar() {
@@ -21,6 +23,7 @@ function Navbar() {
         <Link to="/intro" className={`nav-link ${location.pathname === '/intro' ? 'active' : ''}`}>📖 บทนำ</Link>
         <Link to="/softpower" className={`nav-link ${location.pathname === '/softpower' ? 'active' : ''}`}>🏞️ Soft Power</Link>
         <Link to="/adventure" className={`nav-link ${location.pathname.startsWith('/adventure') ? 'active' : ''}`}>🎮 แผนที่เกม/บทเรียน</Link>
+        <Link to="/dashboard" className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}>📊 สรุปผู้เข้าใช้งาน</Link>
       </div>
       <div className="score-display">
         <Shield size={20} />
@@ -39,6 +42,7 @@ function Navbar() {
 function App() {
   return (
     <Router>
+      <RoleSelectionModal />
       <div className="app-container">
         <Navbar />
         <main className="main-content">
@@ -48,6 +52,7 @@ function App() {
             <Route path="/intro" element={<Intro />} />
             <Route path="/softpower" element={<SoftPower />} />
             <Route path="/adventure/*" element={<AdventureMap />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
       </div>
