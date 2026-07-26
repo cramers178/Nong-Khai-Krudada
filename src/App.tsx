@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useGame } from './context/GameContext';
 import Home from './pages/Home';
@@ -40,12 +41,40 @@ function Navbar() {
 }
 
 function App() {
+  useEffect(() => {
+    // ป้องกันการคลิกขวา (Right-click)
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // ป้องกันปุ่ม F12, Ctrl+Shift+I, Ctrl+U
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.key === 'F12' || 
+        (e.ctrlKey && e.shiftKey && e.key === 'I') || 
+        (e.ctrlKey && e.key === 'U') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J')
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <Router>
       <RoleSelectionModal />
-      <div className="app-container">
+      <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <Navbar />
-        <main className="main-content">
+        <main className="main-content" style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/lessons" element={<Lessons />} />
@@ -55,6 +84,18 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </main>
+        
+        {/* Footer */}
+        <footer style={{ 
+          textAlign: 'center', 
+          padding: '15px', 
+          backgroundColor: 'rgba(15, 17, 26, 0.8)', 
+          borderTop: '1px solid var(--border-color)',
+          color: 'var(--text-secondary)',
+          marginTop: 'auto'
+        }}>
+          <p style={{ margin: 0 }}>ผู้พัฒนา : นางสาวสุนิต อุยพิตัง</p>
+        </footer>
       </div>
     </Router>
   );

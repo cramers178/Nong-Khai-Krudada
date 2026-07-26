@@ -14,6 +14,15 @@
   --text-muted: #adb5bd;
 }
 
+/* ป้องกันการลากภาพ */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,6 +38,12 @@ body {
   color: var(--text-color);
   min-height: 100vh;
   overflow-x: hidden;
+  
+  /* ป้องกันการคลุมดำข้อความ */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Glassmorphism */
