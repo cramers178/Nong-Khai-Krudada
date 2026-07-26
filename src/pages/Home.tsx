@@ -17,7 +17,7 @@ export default function Home() {
           width: '100%',
           maxWidth: '1200px', // Restrict max width so it doesn't get too large
           aspectRatio: '16/10', // Adjust if the real image aspect ratio is different (e.g. 3/2 or 16/9)
-          backgroundImage: 'url(/cover.jpg)', // The user must save their image as public/cover.jpg
+          backgroundImage: 'url(/cover.jpg?v=2)', // The user must save their image as public/cover.jpg
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
