@@ -270,9 +270,9 @@ export default function SoftPower() {
       <div className="glass-panel animate-fade-in" style={{ padding: '3rem', maxWidth: '900px', margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
           {data?.icon.startsWith('/') ? (
-            <img src={data.icon} alt={data.title} style={{ width: '150px', height: '150px', objectFit: 'cover', borderRadius: '50%', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }} />
+            <img src={data.icon} alt={data.title} style={{ width: '100%', maxWidth: '350px', aspectRatio: '1/1', objectFit: 'cover', borderRadius: '20px', boxShadow: '0 8px 25px rgba(0,0,0,0.4)' }} />
           ) : (
-            <div style={{ fontSize: '4rem' }}>{data?.icon}</div>
+            <div style={{ fontSize: '8rem' }}>{data?.icon}</div>
           )}
         </div>
         <h1 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '2rem' }}>{data?.title}</h1>
@@ -314,13 +314,14 @@ export default function SoftPower() {
               fontSize: '4.5rem', 
               marginBottom: '1.5rem',
               background: 'rgba(255,255,255,0.1)',
-              width: '120px',
-              height: '120px',
+              width: '100%',
+              maxWidth: '250px',
+              aspectRatio: '1/1',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              borderRadius: '50%',
-              boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+              borderRadius: '20px',
+              boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
               overflow: 'hidden'
             }}>
               {item.icon.startsWith('/') ? (
