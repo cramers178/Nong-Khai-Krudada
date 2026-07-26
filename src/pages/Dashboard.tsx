@@ -6,28 +6,29 @@ import {
 
 export default function Dashboard() {
   const [statsData, setStatsData] = useState<{ name: string, value: number, fill: string }[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Read stats from localStorage
-    const storedStats = localStorage.getItem('roleStats');
-    let rawStats: Record<string, number> = { teacher: 5, student: 15, general: 10 };
-    
-    if (storedStats) {
+    const fetchData = async () => {
       try {
-        rawStats = JSON.parse(storedStats);
+        const response = await fetch('https://script.google.com/macros/s/AKfycbxzEXRcOLlJ0_kVtdW8AxMOMxayiwFmR4HvwChAveR7pgFL66kOcPG4J7Ie0EP11E0q/exec');
+        const rawStats = await response.json();
+        
+        const data = [
+          { name: 'ครู (Teacher)', value: rawStats.teacher || 0, fill: '#ff007a' },
+          { name: 'นักเรียน (Student)', value: rawStats.student || 0, fill: '#4cc9f0' },
+          { name: 'บุคคลทั่วไป (General)', value: rawStats.general || 0, fill: '#7209b7' },
+        ];
+        setStatsData(data);
       } catch (e) {
-        console.error('Failed to parse role stats for dashboard');
+        console.error('Failed to fetch stats from Google Apps Script', e);
+        // Fallback or empty state
+      } finally {
+        setLoading(false);
       }
-    }
-
-    // Transform for Recharts
-    const data = [
-      { name: 'ครู (Teacher)', value: rawStats.teacher || 0, fill: '#ff007a' },
-      { name: 'นักเรียน (Student)', value: rawStats.student || 0, fill: '#4cc9f0' },
-      { name: 'บุคคลทั่วไป (General)', value: rawStats.general || 0, fill: '#7209b7' },
-    ];
+    };
     
-    setStatsData(data);
+    fetchData();
   }, []);
 
   return (
@@ -36,7 +37,12 @@ export default function Dashboard() {
         📊 สรุปผู้เข้าใช้งาน (Dashboard)
       </h1>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
+      {loading ? (
+        <div style={{ textAlign: 'center', padding: '50px', fontSize: '1.2rem', color: '#4cc9f0' }}>
+          กำลังโหลดข้อมูลจากฐานข้อมูล...
+        </div>
+      ) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '30px' }}>
         
         {/* Bar Chart Container */}
         <div className="glass-panel" style={{ padding: '20px', height: '400px', display: 'flex', flexDirection: 'column' }}>
@@ -88,7 +94,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-      </div>
+        </div>
+      )}
     </div>
   );
 }

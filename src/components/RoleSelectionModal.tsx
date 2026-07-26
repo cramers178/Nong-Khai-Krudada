@@ -4,6 +4,7 @@ import './RoleSelectionModal.css';
 
 export const RoleSelectionModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     // Check if the user has already selected a role
@@ -13,32 +14,29 @@ export const RoleSelectionModal: React.FC = () => {
     }
   }, []);
 
-  const handleSelectRole = (role: string) => {
-    localStorage.setItem('userRole', role);
+  const handleSelectRole = async (role: string) => {
+    setIsSubmitting(true);
     
-    // Simulate updating global stats (for demo purposes)
-    const storedStats = localStorage.getItem('roleStats');
-    let stats: Record<string, number> = { teacher: 0, student: 0, general: 0 };
-    
-    if (storedStats) {
-      try {
-        stats = JSON.parse(storedStats);
-      } catch (e) {
-        console.error('Failed to parse role stats');
-      }
-    } else {
-        // initialize some fake stats if empty so the chart doesn't look completely empty initially
-        stats = { teacher: 5, student: 15, general: 10 };
+    try {
+      const formData = new URLSearchParams();
+      formData.append('role', role);
+
+      await fetch('https://script.google.com/macros/s/AKfycbxzEXRcOLlJ0_kVtdW8AxMOMxayiwFmR4HvwChAveR7pgFL66kOcPG4J7Ie0EP11E0q/exec', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Use no-cors to prevent CORS issues with Google Apps Script redirect
+      });
+
+      localStorage.setItem('userRole', role);
+      setIsOpen(false);
+    } catch (e) {
+      console.error('Failed to save role to Google Apps Script', e);
+      // Still allow them to enter even if tracking fails, or show error
+      localStorage.setItem('userRole', role);
+      setIsOpen(false);
+    } finally {
+      setIsSubmitting(false);
     }
-    
-    if (stats[role] !== undefined) {
-      stats[role] += 1;
-    } else {
-        stats[role] = 1;
-    }
-    
-    localStorage.setItem('roleStats', JSON.stringify(stats));
-    setIsOpen(false);
   };
 
   if (!isOpen) return null;
@@ -50,19 +48,23 @@ export const RoleSelectionModal: React.FC = () => {
         <p style={{ textAlign: 'center', marginBottom: '30px', fontSize: '1.2rem' }}>กรุณาระบุสถานะของคุณก่อนเข้าใช้งาน</p>
         
         <div className="role-buttons">
-          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('teacher')}>
+          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('teacher')} disabled={isSubmitting}>
             <GraduationCap size={24} />
             ครู
           </button>
-          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('student')}>
+          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('student')} disabled={isSubmitting}>
             <User size={24} />
             นักเรียน
           </button>
-          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('general')}>
+          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('general')} disabled={isSubmitting}>
             <Users size={24} />
             บุคคลทั่วไป
           </button>
         </div>
+        
+        {isSubmitting && (
+          <p style={{ textAlign: 'center', marginTop: '20px', color: '#4cc9f0' }}>กำลังบันทึกข้อมูล...</p>
+        )}
       </div>
     </div>
   );
