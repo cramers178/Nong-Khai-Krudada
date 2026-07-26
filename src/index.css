@@ -120,7 +120,7 @@ body {
 .main-content {
   flex: 1;
   padding: 2rem;
-  max-width: 1200px;
+  max-width: 2048px;
   margin: 0 auto;
   width: 100%;
 }
@@ -191,6 +191,30 @@ body {
   .score-display {
     margin-top: 0.5rem;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .glass-panel {
+    padding: 1.5rem !important; /* Override inline padding for mobile */
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .badge {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
   }
 }
 

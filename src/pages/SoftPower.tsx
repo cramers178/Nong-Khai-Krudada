@@ -301,7 +301,7 @@ export default function SoftPower() {
         เลือกสถานที่ที่คุณต้องการศึกษาประวัติศาสตร์ วัฒนธรรม และอิทธิพลที่มีต่อวิถีชีวิต
       </p>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2.5rem', maxWidth: '2048px', margin: '0 auto' }}>
         {softPowerData.map(item => (
           <div key={item.id} className="glass-panel hover-scale" style={{ 
             padding: '2.5rem 2rem', 

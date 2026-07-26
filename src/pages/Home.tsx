@@ -15,7 +15,7 @@ export default function Home() {
         style={{
           position: 'relative',
           width: '100%',
-          maxWidth: '1200px', // Restrict max width so it doesn't get too large
+          maxWidth: '2048px', // Expanded to 2048px per user request
           aspectRatio: '16/10', // Adjust if the real image aspect ratio is different (e.g. 3/2 or 16/9)
           backgroundImage: 'url(/ปก.png)', // The user must save their image as public/ปก.png
           backgroundSize: 'contain',
