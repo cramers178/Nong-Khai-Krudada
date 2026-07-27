@@ -79,19 +79,23 @@ function NagaTaleViewer() {
         style={{ 
           width: '100%', 
           maxWidth: '1152px', 
-          aspectRatio: '1152 / 1023',
+          maxHeight: '65vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           position: 'relative',
           borderRadius: '16px',
           overflow: 'hidden',
           boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
-          cursor: 'pointer'
+          cursor: 'pointer',
+          backgroundColor: 'rgba(0,0,0,0.2)'
         }}
         onClick={nextSlide}
       >
         <img 
           src={slide.image} 
           alt={`Naga Tale ${currentSlide + 1}`} 
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          style={{ width: '100%', height: '100%', maxHeight: '65vh', objectFit: 'contain' }}
         />
         
         {currentSlide > 0 && (
