@@ -49,11 +49,11 @@ export default function Home() {
           }} 
         />
 
-        {/* 3. วิทยาการคำนวณ ม.3 */}
+        {/* 3. วิทยาการคำนวณ */}
         <Link 
           to="/cslessons" 
           className="hover-zone" 
-          title="วิทยาการคำนวณ ม.3"
+          title="วิทยาการคำนวณ"
           style={{
             position: 'absolute',
             top: '67%', left: '35%', width: '19.5%', height: '8%'

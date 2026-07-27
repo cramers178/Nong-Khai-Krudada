@@ -44,17 +44,22 @@ export const RoleSelectionModal: React.FC = () => {
   return (
     <div className="role-modal-overlay">
       <div className="role-modal glass-panel">
-        <h2 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '20px', fontSize: '2rem' }}>ยินดีต้อนรับ</h2>
-        <p style={{ textAlign: 'center', marginBottom: '30px', fontSize: '1.2rem' }}>กรุณาระบุสถานะของคุณก่อนเข้าใช้งาน</p>
+        <h2 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '15px', fontSize: '1.8rem', lineHeight: '1.4' }}>
+          ยินดีต้อนรับสู่ "Mekong Legends:<br/>ตำนานพญานาคสู่นวัตกรรมเกมการเรียนรู้"
+        </h2>
+        <p style={{ textAlign: 'center', marginBottom: '15px', fontSize: '1.2rem', fontStyle: 'italic', color: '#4cc9f0' }}>
+          "เฮ็ดในสิ่งที่เชื่อ เชื่อในสิ่งที่เฮ็ด"
+        </p>
+        <p style={{ textAlign: 'center', marginBottom: '30px', fontSize: '1.1rem' }}>ผู้เข้าใช้งานคือใคร? (กรุณาระบุสถานะ)</p>
         
         <div className="role-buttons">
-          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('teacher')} disabled={isSubmitting}>
-            <GraduationCap size={24} />
-            ครู
-          </button>
           <button className="role-btn btn-secondary" onClick={() => handleSelectRole('student')} disabled={isSubmitting}>
             <User size={24} />
             นักเรียน
+          </button>
+          <button className="role-btn btn-secondary" onClick={() => handleSelectRole('teacher')} disabled={isSubmitting}>
+            <GraduationCap size={24} />
+            ครู
           </button>
           <button className="role-btn btn-secondary" onClick={() => handleSelectRole('general')} disabled={isSubmitting}>
             <Users size={24} />

@@ -118,7 +118,7 @@ export default function CSLessons() {
 
   return (
     <div className="animate-fade-in" style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <h1 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '1rem' }}>บทเรียนวิทยาการคำนวณ ม.3</h1>
+      <h1 className="title text-gradient" style={{ textAlign: 'center', marginBottom: '1rem' }}>บทเรียนวิทยาการคำนวณ</h1>
       <p style={{ textAlign: 'center', marginBottom: '3rem' }}>เลือกบทเรียนที่คุณต้องการศึกษาและทำแบบทดสอบเพื่อสะสมคะแนน</p>
       
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

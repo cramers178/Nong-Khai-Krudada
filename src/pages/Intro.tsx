@@ -13,7 +13,7 @@ export default function Intro() {
         <ul style={{ listStyleType: 'disc', paddingLeft: '2rem', marginBottom: '2rem' }}>
           <li>ส่งเสริมการเรียนรู้ Soft Power จังหวัดหนองคาย</li>
           <li>ส่งเสริมการเรียนรู้ผ่านเกม (Game-Based Learning)</li>
-          <li>บูรณาการกับรายวิชาวิทยาการคำนวณ ม.3</li>
+          <li>บูรณาการกับรายวิชาวิทยาการคำนวณ</li>
           <li>ฝึกการคิดวิเคราะห์ การแก้ปัญหา และการวางแผน</li>
         </ul>
 
