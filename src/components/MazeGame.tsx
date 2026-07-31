@@ -16,7 +16,7 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
   const [isLost, setIsLost] = useState(false);
   const [pearlsCollected, setPearlsCollected] = useState(0);
   const [collectedPositions, setCollectedPositions] = useState<Set<string>>(new Set());
-  const [timeLeft, setTimeLeft] = useState(45);
+  const [timeLeft, setTimeLeft] = useState(60);
 
   // Count total pearls in grid
   const totalPearls = grid.flat().filter(c => c === 4).length;
@@ -60,37 +60,36 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
       // Check wall
       if (grid[nr][nc] === 1) return prev;
 
-      const posKey = `${nr}-${nc}`;
-      
-      // Handle pearl collection
-      if (grid[nr][nc] === 4 && !collectedPositions.has(posKey)) {
-        setCollectedPositions(prevSet => new Set(prevSet).add(posKey));
-        setPearlsCollected(p => p + 1);
-        addScore(5); // +5 for picking up item
-      }
-
-      // Handle exit
-      if (grid[nr][nc] === 3) {
-        setPearlsCollected(currentPearls => {
-          // Note: using the functional state update to get the latest pearlsCollected
-          // but we can also rely on the fact that if this is the last pearl, 
-          // currentPearls + (was it a pearl? no, 3 is end)
-          const newPearls = (grid[nr][nc] === 4 && !collectedPositions.has(posKey)) ? currentPearls + 1 : currentPearls;
-          
-          if (newPearls >= totalPearls) {
-            setIsWon(true);
-            addScore(20); // +20 for passing game
-            setTimeout(onComplete, 1500);
-          } else {
-            alert('ต้องเก็บลูกแก้วให้ครบ ' + totalPearls + ' ลูกก่อนถึงจะออกได้!');
-          }
-          return newPearls;
-        });
-      }
-
       return { r: nr, c: nc };
     });
-  }, [isWon, isLost, grid, collectedPositions, totalPearls, addScore, onComplete]);
+  }, [isWon, isLost, grid]);
+
+  // Handle tile effects when player moves
+  useEffect(() => {
+    if (isWon || isLost) return;
+
+    const { r, c } = playerPos;
+    const cell = grid[r][c];
+    const posKey = `${r}-${c}`;
+
+    // Handle pearl collection
+    if (cell === 4 && !collectedPositions.has(posKey)) {
+      setCollectedPositions(prevSet => new Set(prevSet).add(posKey));
+      setPearlsCollected(p => p + 1);
+      addScore(5); // +5 for picking up item
+    }
+
+    // Handle exit
+    if (cell === 3) {
+      if (pearlsCollected >= totalPearls) {
+        setIsWon(true);
+        addScore(20); // +20 for passing game
+        setTimeout(onComplete, 1500);
+      } else {
+        alert('ต้องเก็บลูกแก้วให้ครบ ' + totalPearls + ' ลูกก่อนถึงจะออกได้!');
+      }
+    }
+  }, [playerPos, grid, collectedPositions, pearlsCollected, totalPearls, isWon, isLost, addScore, onComplete]);
 
   // Keyboard controls
   useEffect(() => {
@@ -107,7 +106,7 @@ export default function MazeGame({ grid, onComplete }: MazeGameProps) {
 
   const handleRetry = () => {
     setIsLost(false);
-    setTimeLeft(45);
+    setTimeLeft(60);
     setPearlsCollected(0);
     setCollectedPositions(new Set());
     // Reset position
